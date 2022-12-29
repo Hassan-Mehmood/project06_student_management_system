@@ -10,5 +10,11 @@ class Student {
         this.ID = crypto.randomBytes(5).toString('hex');
         this.courses = [];
     }
+    get getCourses() {
+        return this.courses;
+    }
+    set setCourses(course) {
+        this.courses.push(course);
+    }
 }
 export default Student;

@@ -13,7 +13,22 @@ const MENU_CHOICES = [
   'Show status',
   'Exit',
 ];
+
 const studentsArr: Student[] = [];
+const coursesArr = [
+  {
+    name: 'Metavere Developer',
+    instructor: 'Dr Zia Khan',
+  },
+  {
+    name: 'Data Structures and Algorithms',
+    instructor: 'Professor Smith',
+  },
+  {
+    name: 'Object Oriented Programming',
+    instructor: 'Professor Someone',
+  },
+];
 
 async function main() {
   while (true) {
@@ -25,7 +40,9 @@ async function main() {
     });
 
     if (menuOption === MENU_CHOICES[0]) await addNewStudent();
-    if (menuOption === MENU_CHOICES[1]) viewAllStudents();
+    if (menuOption === MENU_CHOICES[1]) console.log(studentsArr);
+    if (menuOption === MENU_CHOICES[2]) console.log(coursesArr);
+    if (menuOption === MENU_CHOICES[3]) enrollStudent();
     if (menuOption === MENU_CHOICES[7]) break;
   }
 }
@@ -62,8 +79,13 @@ async function addNewStudent() {
   studentsArr.push(student);
 }
 
-function viewAllStudents() {
-  console.log(studentsArr);
+async function enrollStudent() {
+  const { course } = await inquirer.prompt({
+    message: 'Select a course',
+    name: 'course',
+    type: 'rawlist',
+    choices: coursesArr,
+  });
 }
 
 main();
